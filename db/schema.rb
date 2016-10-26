@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025075428) do
+ActiveRecord::Schema.define(version: 20161026102322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -368,12 +368,14 @@ ActiveRecord::Schema.define(version: 20161025075428) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "設備マスタ", ["設備コード"], name: "index_設備マスタ_on_設備コード", unique: true, using: :btree
+
   create_table "設備予約", force: :cascade do |t|
     t.string   "設備コード"
-    t.string   "予約者"
-    t.string   "相手先"
     t.string   "開始"
     t.string   "終了"
+    t.string   "予約者"
+    t.string   "相手先"
     t.text     "用件"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

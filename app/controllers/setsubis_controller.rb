@@ -24,13 +24,21 @@ class SetsubisController < ApplicationController
 
   def create
     @setsubi = Setsubi.new(setsubi_params)
-    @setsubi.save
-    respond_with(@setsubi)
+    if @setsubi.save
+      flash[:danger] = t "app.flash.file_format_invalid"
+      respond_with(@setsubi)
+      else
+        render :new
+      end
   end
 
   def update
-    @setsubi.update(setsubi_params)
-    respond_with(@setsubi)
+    if @setsubi.update(setsubi_params)
+      flash[:danger] = t "app.flash.file_format_invalid"
+      respond_with(@setsubi)
+    else
+      render :edit
+    end
   end
 
   def destroy
